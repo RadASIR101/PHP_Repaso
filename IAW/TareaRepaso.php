@@ -1,8 +1,16 @@
 <?php 
 
 //  1. Declara una variable $nombre con tu nombre y muéstrala usando echo.  
+$nombre = "Raul Vela";
+echo $nombre;
 
 //  2. Declara dos variables: $a = 5 y $b = 3. Muestra la suma usando echo dentro de una frase con comillas dobles.  
+$a = 5;
+$b = 3;
+
+echo "<br />";
+$suma = $a + $b;
+echo $suma;
 
 // 3. Usa comillas simples para mostrar el texto: El valor de $a es 5 (debe mostrarse literal, sin interpretar $a). 
 

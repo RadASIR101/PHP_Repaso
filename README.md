@@ -1,2 +1,5 @@
-# PHP_Repaso
-PHP_Repaso_ASIR_2
+# ASIR 2025
+
+## Ejercicios de respaso de PHP
+
+Conjunto de ejercicios basicos de PHP

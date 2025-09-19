@@ -17,14 +17,13 @@ echo "<br />";
 // 3. Usa comillas simples para mostrar el texto: El valor de $a es 5 (debe mostrarse literal, sin interpretar $a). 
 
 $texto = 'El valor de $a es 5';
-echo "<br />";
 echo $texto;
 echo "<br />";
 
 // 4. Usa comillas dobles para mostrar el texto: El valor de $a es 5 (debe mostrar el valor de la variable $a). 
  
-$texto2 = "El valor de $a es 5";
-echo $texto2;
+$texto = "El valor de $a es 5";
+echo $texto;
 echo "<br />";
 
 // 5. Declara $texto = "Hola" y $numero = 10. Concatena ambos con el operador . y muéstralos con echo. 
@@ -42,12 +41,26 @@ echo $valor_casting;
 echo "<br />";
 
 // 7. Declara $valor = 45.7. Conviértelo a entero usando casting. Muestra el resultado. 
+$valor = 45.7;
+$valor_entero = (int)$valor;
+echo $valor_entero;
+echo "<br />";
 
 // 8. Declara $valor = true. Conviértelo a entero y muéstralo. ¿Qué valor esperas? 
+$valor = true;
+$valor_entero = (int) $valor;
+echo $valor_entero . " es el valor esperado";
+echo "<br />";
 
 // 9. Declara $valor = "hola". Conviértelo a entero y muéstralo. ¿Qué resultado da? 
 
+$valor = "hola";
+$valor_entero = (int)$valor;
+echo $valor_entero;
+echo "<br />";
+
 // 10. Declara $edad = 25 y muestra con echo usando comillas dobles: Tengo 25 años. 
+
 
 // 11. Declara $ciudad = "Madrid" y $pais = "España". Muestra con echo usando comillas dobles: Vivo en Madrid, España. 
 

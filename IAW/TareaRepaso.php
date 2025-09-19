@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 //  1. Declara una variable $nombre con tu nombre y muéstrala usando echo.  
 $nombre = "Raul Vela";
 echo $nombre;
+echo "<br />";
 
 //  2. Declara dos variables: $a = 5 y $b = 3. Muestra la suma usando echo dentro de una frase con comillas dobles.  
 $a = 5;
@@ -11,14 +12,34 @@ $b = 3;
 echo "<br />";
 $suma = $a + $b;
 echo $suma;
+echo "<br />";
 
 // 3. Usa comillas simples para mostrar el texto: El valor de $a es 5 (debe mostrarse literal, sin interpretar $a). 
 
+$texto = 'El valor de $a es 5';
+echo "<br />";
+echo $texto;
+echo "<br />";
+
 // 4. Usa comillas dobles para mostrar el texto: El valor de $a es 5 (debe mostrar el valor de la variable $a). 
+ 
+$texto2 = "El valor de $a es 5";
+echo $texto2;
+echo "<br />";
 
 // 5. Declara $texto = "Hola" y $numero = 10. Concatena ambos con el operador . y muéstralos con echo. 
 
+$texto = "Hola";
+$numero = 10;
+echo "$texto " . " $numero";
+echo "<br />";
+
 // 6. Declara $valor = "123" (cadena). Conviértelo a entero usando casting y súmale 10. Muestra el resultado. 
+
+$valor = "123";
+$valor_casting =  (int)$valor;
+echo $valor_casting;
+echo "<br />";
 
 // 7. Declara $valor = 45.7. Conviértelo a entero usando casting. Muestra el resultado. 
 

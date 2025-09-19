@@ -60,15 +60,67 @@ echo $valor_entero;
 echo "<br />";
 
 // 10. Declara $edad = 25 y muestra con echo usando comillas dobles: Tengo 25 años. 
+$edad = 25;
+echo "$edad con comillas dobles ";  
+echo "<br />";
 
+echo "<hr>";
 
 // 11. Declara $ciudad = "Madrid" y $pais = "España". Muestra con echo usando comillas dobles: Vivo en Madrid, España. 
+$ciudad = "Madrid";
+$pais = "España";
+echo "Vivo en $ciudad , $pain";
+echo "<br />";
 
-// 12. Declara $numero = "007". Conviértelo a entero y luego a cadena otra vez. Muestra ambos pasos. 
+// 12. Declara 'numero = "007" . Conviértelo a entero y luego a cadena otra vez. Muestra ambos pasos.";
+$numero = "007";
+var_dump($numero);
+echo "<br />";
+$entero = (int)$numero;
+var_dump($entero);
+echo "<br />";
+$cadena = (string)$entero;
+var_dump($cadena);
+echo "<br />";
 
 // 13. Declara $dato = 0. Conviértelo a booleano y muéstralo con var_dump() (solo en este ejercicio se permite, para ver el tipo). 
+echo "<hr>";
+$dato = 0;
+$booleano = (bool)$dato;
+var_dump($booleano);
+echo "<br />";
+echo "Tipo de valor :" . gettype($booleano); 
+echo $booleano;
+//   gettype($booleano);
+// var_dump($booleano)
+echo "<hr>";
 
 // 14. Declara $frase = 'El precio es $precio pesos' (usa comillas simples). Luego define $precio = 500 y muestra la frase literal y luego la frase con el valor reemplazado (usando comillas dobles en un nuevo echo). 
 
-// 15. Declara $x = "5" y $y = 10. Suma ambos sin convertir explícitamente. Muestra el resultado y explica por qué funciona.  
  
+$frase = 'El precio es $precio pesos';
+$precio = 500;
+echo $frase;
+echo "<br />";
+echo "$frase $precio";
+echo "<br />";
+$frase2 = "El precio es $precio pesos";
+
+echo "<hr>";
+// 15. Declara $x = "5" y $y = 10. Suma ambos sin convertir explícitamente. Muestra el resultado y explica por qué funciona.  
+$x = "5";
+$y = 10;
+$suma = $x + $y;
+echo $suma;
+
+// PHP es un lenguaje de tipado débil, lo que significa que realiza conversión implícita de tipos cuando es necesario. 
+// 
+// En este caso:
+
+// $x es una cadena ("5"), pero contiene un valor numérico válido.
+
+// Al usar el operador +, PHP intenta convertir ambos operandos a números.
+
+// Convierte "5" a 5 automáticamente.
+
+// Luego suma 5 + 10, dando como resultado 15

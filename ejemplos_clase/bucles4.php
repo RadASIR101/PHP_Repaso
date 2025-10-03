@@ -1,6 +1,12 @@
+ 
 <?php
 
 echo date("Y-m-d");
+
+echo "<hr>";
+$edad = random_int(1, 100);
+
+echo "La edad es $edad <br>";
 
 // suma todos lso numero del 1 hasta 100
 
@@ -25,3 +31,5 @@ for ($i = 1; $i <= $numero; $i++) {
 }
 echo "\n El valor es : " . $producto;
 
+
+ 

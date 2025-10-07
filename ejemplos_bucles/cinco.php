@@ -88,7 +88,7 @@ echo "<hr>";
 
 $edad = 30;
 $edad = 90;
-$edad = 10;
+$edad = 10;   
 $solicitud = true;
 $salud = "buena";
 $dependeAsegurado = true;

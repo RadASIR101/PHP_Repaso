@@ -262,6 +262,6 @@ for ($i = 1; $i <= 15; $i++) {
 }
 
 
-for ($cont = 1 ; $i < $cont <= 15; $i += 3, $cont++) {
-    echo "$i, ";
-}
+// for ($cont = 1 ; $i < $cont <= 15; $i += 3, $cont++) {
+//     echo "$i, ";
+// }

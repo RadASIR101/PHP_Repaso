@@ -10,6 +10,4 @@ do {
 
     if ($numero <= $numeroSecreto) {
     }
-
-
 } while (false);

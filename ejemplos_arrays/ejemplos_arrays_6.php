@@ -160,3 +160,8 @@ echo calculadora_Match("/", $numero1, 0);
 echo "<hr>";
 echo calculadora_Match("%", $numero1, $numero2);
 echo "<hr>";
+
+function esPar($numero)
+{
+    return $numero % 2 == 0;
+}

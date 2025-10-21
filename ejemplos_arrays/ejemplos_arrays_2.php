@@ -53,3 +53,5 @@ foreach ($nombres as $indice => $valor) {
     echo " - " . $indice . " " . $valor;
 }
 echo "<hr>";
+
+

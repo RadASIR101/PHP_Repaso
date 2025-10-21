@@ -9,6 +9,9 @@ function incrementaValor1(int $a): int
 
 echo incrementaValor1(12);
 
+/**
+ * 
+ */
 function incrementaValor2(int $a): int
 {
     return ++$a;
@@ -16,6 +19,9 @@ function incrementaValor2(int $a): int
 
 echo incrementaValor2(12);
 
+/**
+ * 
+ */
 function incrementaValor3(int $a): int
 {
     return $a + 1;
@@ -60,6 +66,9 @@ function esPrimoAmbitoDoble(int|float $numero): bool
     return true;
 }
 
+/**
+ * 
+ */
 function esPrimoAmbitoMezcla(int|bool $numero): bool
 {
     if ($numero <= 1) {

@@ -1,40 +1,42 @@
 <?php
 
-$provincias = ["Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga", "Sevilla"];
+// rerquire e include , require_once , include_once
 
-/**
- * 
- */
-function limpiarCadena(string $cadena): string
-{
-    return htmlspecialchars(trim($cadena));
-}
+// $provincias = ["Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga", "Sevilla"];
 
-function esLongitudCampoValido(string $valor, int $min, int $max): bool
-{
+// /**
+//  * 
+//  */
+// function limpiarCadena(string $cadena): string
+// {
+//     return htmlspecialchars(trim($cadena));
+// }
 
-    if (strlen($valor) < $min || strlen($valor) > $max) {
-        return false;
-    }
-    return true;
-}
+// function esLongitudCampoValido(string $valor, int $min, int $max): bool
+// {
 
-function isEmailValido(string $email): bool
-{
-    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return true;
-    }
-    return false;
-}
+//     if (strlen($valor) < $min || strlen($valor) > $max) {
+//         return false;
+//     }
+//     return true;
+// }
 
-function isProvinciaValida(string $prov): bool
-{
-    global $provincias;
-    if (in_array($prov, $provincias)) {
-        return true;
-    }
-    return false;
-}
+// function isEmailValido(string $email): bool
+// {
+//     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+//         return true;
+//     }
+//     return false;
+// }
+
+// function isProvinciaValida(string $prov): bool
+// {
+//     global $provincias;
+//     if (in_array($prov, $provincias)) {
+//         return true;
+//     }
+//     return false;
+// }
 
 
 //1 - Recoger los datos y filtro del formulario usando POST

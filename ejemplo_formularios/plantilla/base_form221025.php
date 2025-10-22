@@ -2,16 +2,14 @@
 <html lang="es">
 
 <?php
-
 $provincias = ["Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "Málaga", "Sevilla"];
-
+sort($provincias);
 ?>
-
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario PHP - 2025-10-21</title>
+    <title>Formulario PHP - 2025-10-22</title>
     <!-- Carga los estilos de Tailwind y FontAwesome -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -25,7 +23,7 @@ $provincias = ["Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "
     <div class="p-4 rounded-xl shadow-xl w-1/2 mx-auto bg-gray-200">
         <form method="POST" action="action1.php">
             <!-- Nombre -->
-            <div class="relative">
+            <div class="relative mb-3">
                 <input type="text" name="nombre" placeholder="Nombre"
                     class="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -33,8 +31,18 @@ $provincias = ["Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "
                 </div>
             </div>
 
+            <!-- password -->
+            <div class="relative mb-3">
+                <input type="text" name="password" placeholder="Password"
+                    class="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <i class="fas fa-user text-gray-400"></i>
+                </div>
+            </div>
+
+
             <!-- Email -->
-            <div class="relative">
+            <div class="relative mb-3">
                 <input type="email" name="email" placeholder="Email"
                     class="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -43,7 +51,7 @@ $provincias = ["Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "
             </div>
 
             <!-- Descripción -->
-            <div class="relative">
+            <div class="relative mb-3">
                 <textarea name="descripcion" rows="4" placeholder="Descripción"
                     class="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                 <div class="absolute top-2 left-3 pointer-events-none">
@@ -51,51 +59,23 @@ $provincias = ["Almería", "Cádiz", "Córdoba", "Granada", "Huelva", "Jaén", "
                 </div>
             </div>
 
-            <!-- Provincia -->
-            <div class="relative">
-                <select name="provincia"
-                    class="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-[FontAwesome,_Arial]">
-                    <option value="Almeria">&#xf279; Almería</option> <!-- f279 = fa-map-marker-alt -->
+            <!-- Campo Provincia -->
+            <div class="relative mb-3">
+                <select id="provincia" name="provincia"
+                    class="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">Selecciona provincia</option>
+                    <?php
+                    foreach ($provincias as $item) {
+                        echo "<option>$item</option>";
+                    }
+                    ?>
                 </select>
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <i class="fas fa-map-marker-alt text-gray-400"></i>
                 </div>
             </div>
 
-            <!-- Campo Provincia -->
-            <div class="relative">
-                <select name="provincia"
-                    class="pl-10 pr-4 py-2 w-full border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-[FontAwesome,_Arial]">
-                    <option value="Almeria">&#xf279; Almería</option> <!-- f279 = fa-map-marker-alt -->
-                </select id="provincia" name="provincia" class="w-full px-3 py-2 border rounded-lg">
-
-                <?php 
-        sort($provincias);
-        foreach($provincias as $provincia){
-            echo "<option value='$provincia'>&#xf279; $provincia</option>"; 
-        }
-        ?>
-
-                <?php 
-        sort($provincias);
-        foreach($provincias as $item):
-        ?>
-                <option>
-                    <?php echo $item; ?>
-                </option>
-
-
-                <?php 
-        sort($provincias);
-        foreach($provincias as $item):
-        ?>
-                <option>
-                    <?= $item; ?>
-                </option>
-
-                <?php endforeach ;?>
-            </div>
-            <div class="mt-2 flex flex-row-reverse">
+            <div class="mt-2 flex flex-row-reverse">?
                 <button type="submit"
                     class="px-4 py-2 rounded-xl bg-gray-400 hover:bg-green-600 text-white font-bold mr-2">Guardar
                     <i class="fa-solid fa-floppy-disk"></i>

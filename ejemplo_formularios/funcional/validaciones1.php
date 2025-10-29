@@ -1,5 +1,7 @@
 <?php
 
+include 'datos.php'; # incluir las provincias desde otro fichero
+
 /**
  * 
  */
@@ -8,6 +10,9 @@ function limpiarCadena(string $cadena): string
     return htmlspecialchars(trim($cadena));
 }
 
+/**
+ * 
+ */
 function esLongitudCampoValido(string $valor, int $min, int $max): bool
 {
 
@@ -28,6 +33,9 @@ function isEmailValido(string $email): bool
     return false;
 }
 
+/**
+ * 
+ */
 function isProvinciaValida(string $prov): bool
 {
     global $provincias;

@@ -1,6 +1,15 @@
 <?php 
 
+# diferencias entre include , include_once , require , require_once
+# ---------------------------------
+# include: incluye el archivo cada vez que se llama
+# include_once: incluye el archivo solo una vez, evitando redeclaraciones
+# require: incluye el archivo y genera un error fatal si no se encuentra
+# require_once: incluye el archivo solo una vez y genera un error fatal si no se encuentra
+
+
 require 'utilidades/datos.php'; # incluir las provincias desde otro fichero
+require 'utilidades/validaciones.php'; # incluir las funciones de validacion machacando afciones
 
 ### Ejemplo de manejo de formularios en PHP
 // if(isset($_POST['nombre'])){
@@ -16,13 +25,41 @@ require 'utilidades/datos.php'; # incluir las provincias desde otro fichero
     // } else {
         //     $nombre = "";
         // }
-### FIN Ejemplo de manejo de formularios en PHP
         
- if(isset($_POST['nombre'])){
+### Ejemplo de manejo de formularios en PHP
+//  if(isset($_POST['nombre'])){
     // Si estoy aqui es porque se ha enviado el formulario y procesamos los datos
     // 1- Recoger y filtrar los datos del formulario
-    echo "<pre>";
- }
+//     echo "<pre>";
+//     var_dump($_POST);
+//     echo "</pre>";
+//  }
+
+### Consejo : limpiamos todas las variables del formulario , las validamos y guardamos
+// checkbox y radio se tratan aparte - son los que más problemas dan
+
+if(isset($_POST['nombre'])){ 
+// Si estoy aqui es porque se ha enviado el formulario y procesamos los datos
+// 1- Recoger y filtrar los datos del formulario
+  $nombre = limpiarCadena($_POST['nombre']);
+  $email = limpiarCadena($_POST['email']);
+  # array con todos los valores seleccionados en aficiones o vacío si no se ha seleccionado nada - No ha limpiado el array de aficiones - array de cosas o vacio
+  // Estan recogidas pero no limpiadas
+  // $aficiones= (isset($_POST['aficiones'])) ? $_POST['aficiones'] : []; // version larga
+  $aficiones = $_POST['aficiones'] ?? []; // PHP 7+ operador de fusión null
+  // limpiar el array de aficiones
+  if(count($aficiones)){
+// limpiar cada valor del array de aficiones mediante la funcion limpiarCadena
+// El foreach recorre el array y limpia cada valor del array mediante la funcion limpiarCadena utilizando el indice para actualizar el valor en el array original
+      foreach($aficiones as $indice => $aficion){
+          $aficiones[$indice] = limpiarCadena($aficion);
+      }
+  }
+  $administrador = ($_POST['administrador'] ?? 'Error');
+  $administrador = limpiarCadena($administrador);
+  $provincia = limpiarCadena($_POST['provincia']);
+}
+
 
 ?>
 
@@ -68,7 +105,6 @@ require 'utilidades/datos.php'; # incluir las provincias desde otro fichero
       type="text"
       id="nombre"
       name="nombre"
-      required
       class="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       placeholder="Tu nombre"
     />
@@ -84,7 +120,6 @@ require 'utilidades/datos.php'; # incluir las provincias desde otro fichero
       type="email"
       id="email"
       name="email"
-      required
       class="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
       placeholder="tucorreo@ejemplo.com"
     />
@@ -99,8 +134,9 @@ require 'utilidades/datos.php'; # incluir las provincias desde otro fichero
     </legend>
 
     <div class="flex items-center">
-        <?php 
-        foreach($aficiones as $afi){
+      <?php 
+      // tenemos un array de aficiones y generamos un checkbox por cada una , no es un string
+        foreach($aficionesTodas as $afi){
             echo <<< TXT
             <label class="inline-flex items-center">
             <input type="checkbox" name="aficiones[]" value="$afi" class="mr-2"> $afi
@@ -109,8 +145,8 @@ require 'utilidades/datos.php'; # incluir las provincias desde otro fichero
         }
         ?>
     </div>
-
-
+      </fieldset>
+  </div>
 
     <!-- <div class="flex items-center">
       <input id="aficion-cine" name="aficiones[]" type="checkbox" value="cine"
@@ -129,8 +165,8 @@ require 'utilidades/datos.php'; # incluir las provincias desde otro fichero
              class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
       <label for="aficion-php" class="ml-2 text-sm text-gray-700">PHP</label>
     </div> -->
-  </fieldset>
-  </div>
+  <!-- </fieldset> -->
+  <!-- </div> -->
 
   <!-- Administrador (radio SI/NO) -->
 <div class="mb-4">

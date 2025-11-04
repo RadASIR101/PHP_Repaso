@@ -149,7 +149,6 @@ require 'utilidades/datos.php'; # incluir las provincias desde otro fichero
             }
         ?>  
 
-
     <!-- <div class="flex items-center">
       <input id="admin-si" name="administrador" type="radio" value="SI"
              class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />

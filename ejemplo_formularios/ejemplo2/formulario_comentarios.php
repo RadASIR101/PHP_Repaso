@@ -11,6 +11,33 @@
 require 'utilidades/datos.php'; # incluir las provincias desde otro fichero
 require 'utilidades/validaciones.php'; # incluir las funciones de validacion machacando afciones
 
+### Ejemplo de manejo de formularios en PHP
+// if(isset($_POST['nombre'])){
+    // if(isset($_POST['administrador'])){
+// if(isset($_POST['email'])){
+    // $nombre = htmlspecialchars(trim($_POST['nombre']));
+    // echo "Procesando";
+    //     echo "<pre>";
+    //     var_dump($_POST);
+    //     echo "</pre>";
+    //     die(); # detener la ejecución del script aquí
+    // // }
+    // } else {
+        //     $nombre = "";
+        // }
+        
+### Ejemplo de manejo de formularios en PHP
+//  if(isset($_POST['nombre'])){
+    // Si estoy aqui es porque se ha enviado el formulario y procesamos los datos
+    // 1- Recoger y filtrar los datos del formulario
+//     echo "<pre>";
+//     var_dump($_POST);
+//     echo "</pre>";
+//  }
+
+### Consejo : limpiamos todas las variables del formulario , las validamos y guardamos
+// checkbox y radio se tratan aparte - son los que más problemas dan
+
 if(isset($_POST['nombre'])){ 
 // Si estoy aqui es porque se ha enviado el formulario y procesamos los datos
 // 1- Recoger y filtrar los datos del formulario
@@ -31,55 +58,7 @@ if(isset($_POST['nombre'])){
   $administrador = ($_POST['administrador'] ?? 'Error');
   $administrador = limpiarCadena($administrador);
   $provincia = limpiarCadena($_POST['provincia']);
-  // 2. hacemos las validaciones
-  $errores = []; // array para guardar los errores de validacion
-// Si la longitud del nombre no es valida
-  
-  if(!esLongitudCadenaValida($nombre, 3, 30)){
-  $errores[] = "Errores el campo nombre debe de tener entre 3 y 30 caracteres";
-  }
-
-  if(!esEmailValido($email)){
-      $errores[] = "Error , se espera un email no es valido";
-  }
-  
-  if(!sonAficionesValidas($aficiones)){
-      $errores[] = "Error , las aficiones no son validas o no seleccionaste ninguna";
-  }
-
-  if(!isAdministradorValido($administrador)){
-      $errores[] = "Error , el valor de administrador no es valido";
-  }
-
-  if(!esProvinciaValida($provincia)){
-      $errores[] = "Error , la provincia no es valida";
-  }
-
-  // 3. mostramos los errores o procesamos los datos
-  if(count($errores)){
-      // hay errores , los mostramos
-      echo "<ul>";
-      foreach($errores as $err){
-          echo "<li>$err</li>";
-      }
-      echo "</ul>";
-      die(); // detenemos la ejecucion del script
-  }
-
-  // 4. Si no los hay decido que hacer , en este caso muestro los datos procesados
-  echo "<h2>Los datos están correctos y son:</h2>";
-  echo "<p>Nombre : $nombre</p>";
-  echo "<p>Email : $email</p>";
-  echo "<p>Administrador : $administrador</p>";
-  echo "<p>Provincia : $provincia</p>"; 
-  echo "<p>Aficiones : </p>";
-  echo "<ul>";
-  foreach($aficiones as $afi){
-      echo "<li>$afi</li>";
-  }
-  echo "</ul>";
-  die(); // detenemos la ejecucion del script
-  }
+}
 
 
 ?>
@@ -169,6 +148,26 @@ if(isset($_POST['nombre'])){
       </fieldset>
   </div>
 
+    <!-- <div class="flex items-center">
+      <input id="aficion-cine" name="aficiones[]" type="checkbox" value="cine"
+             class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+      <label for="aficion-cine" class="ml-2 text-sm text-gray-700">Cine</label>
+    </div>
+
+    <div class="flex items-center">
+      <input id="aficion-juegos" name="aficiones[]" type="checkbox" value="juegos"
+             class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+      <label for="aficion-juegos" class="ml-2 text-sm text-gray-700">Juegos</label>
+    </div>
+
+    <div class="flex items-center">
+      <input id="aficion-php" name="aficiones[]" type="checkbox" value="php"
+             class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+      <label for="aficion-php" class="ml-2 text-sm text-gray-700">PHP</label>
+    </div> -->
+  <!-- </fieldset> -->
+  <!-- </div> -->
+
   <!-- Administrador (radio SI/NO) -->
 <div class="mb-4">
   <fieldset class="space-y-3">
@@ -185,6 +184,18 @@ if(isset($_POST['nombre'])){
                 TXT;
             }
         ?>  
+
+    <!-- <div class="flex items-center">
+      <input id="admin-si" name="administrador" type="radio" value="SI"
+             class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />
+      <label for="admin-si" class="ml-2 text-sm text-gray-700">SI</label>
+    </div> -->
+
+    <!-- <div class="flex items-center">
+      <input id="admin-no" name="administrador" type="radio" value="NO" checked
+             class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500" />
+      <label for="admin-no" class="ml-2 text-sm text-gray-700">NO</label>
+    </div> -->
   </fieldset>
   </div>
 

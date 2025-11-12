@@ -1,0 +1,137 @@
+services: # Definición del servicio de MariaDB
+  mariadb: # Servicio de base de datos MariaDB
+    image: mariadb:12.0.2 # Imagen oficial de MariaDB
+    container_name: mariadb # Nombre del contenedor
+    restart: always # Reiniciar siempre el contenedor si se detiene
+    environment: # Variables de entorno para la configuración de MariaDB
+      MYSQL_ROOT_PASSWORD: rootpass # Contraseña del usuario root
+      MYSQL_DATABASE: hoteles # Nombre de la base de datos a crear
+      MYSQL_USER: gerente # Usuario de la base de datos
+      MYSQL_PASSWORD: asd1 # Contraseña del usuario de la base de datos
+    volumes: # Se usa para persistir los datos de la base de datos
+      - mariadb_data:/var/lib/mysql # Volumen para almacenar los datos de MariaDB
+    ports: # Mapeo de puertos para acceder a MariaDB desde el host
+      - "127.0.0.1:3306:3306" # Exponer el puerto 3306 solo en localhost así evita que si hay más contenedores de MariaDB en el host haya conflictos de puertos , solo se puede acceder desde el host local a este puerto aunque haya otros contenedores en la misma red de Docker 
+
+  phpmyadmin: # Servicio de phpMyAdmin para administrar la base de datos
+    image: phpmyadmin/phpmyadmin # Imagen oficial de phpMyAdmin
+    container_name: phpmyadmin # Nombre del contenedor
+    restart: always # Reiniciar siempre el contenedor si se detiene
+    ports: # Mapeo de puertos para acceder a phpMyAdmin desde el host
+      - "8080:80" # Exponer el puerto 80 del contenedor en el puerto 8080 del host
+    environment: # Variables de entorno para la configuración de phpMyAdmin
+      PMA_HOST: mariadb # Host de la base de datos (nombre del servicio de MariaDB)
+      PMA_PORT: 3306 # Puerto de la base de datos
+      PMA_USER: gerente # Usuario de la base de datos
+      PMA_PASSWORD: asd1 # Contraseña del usuario de la base de datos
+
+volumes: # Volumes se usa para definir volúmenes de Docker 
+  mariadb_data: # Volumen para almacenar los datos de MariaDB
+
+# --------------------------------------Información adicional---------------------------------------------------------------
+
+## Iniciar y gestionar los servicios con Docker Compose
+
+# Para iniciar los servicios definidos en el archivo docker-compose.yml, se utiliza el comando:
+#   docker-compose up -d
+# Esto levantará los contenedores en segundo plano.
+
+# Para acceder a la shell del contenedor de MariaDB, se puede usar el comando:
+#   docker exec -it mariadb bash
+
+# Dentro del contenedor, se puede acceder a la base de datos MariaDB usando:
+#   mysql -ugerente -pasd1 hoteles -h localhost -P 3306 
+
+# Para acceder al contenedor de mariadb desde la terminal del host, se puede usar el comando:
+#   docker exec -it mariadb mysql -ugerente -pasd1 hoteles
+
+# Para detener los servicios, se utiliza el comando:
+#   docker-compose down
+# Esto detendrá y eliminará los contenedores, redes y volúmenes creados por `up`. 
+# pero los datos almacenados en el volumen `mariadb_data` persistirán y no se perderán gracias a que el volumen está definido explícitamente en la sección `volumes` del archivo docker-compose.yml.
+
+# Si tengo creado los contenedores anteriormente con docker-compose up, y solo quiero iniciarlos solo tengo que ejecutar:
+# Esto iniciará los contenedores que ya han sido creados previamente.
+#   docker-compose start # Inicia automáticamente los contenedores existentes sin recrearlos
+
+# Para detener los contenedores sin eliminarlos, se puede usar:
+#   docker-compose stop # Detiene los contenedores sin eliminarlos
+
+
+# --------------------------------------Instrucciones de uso---------------------------------------------------------------
+
+# Instrucciones para usar este archivo docker-compose.yml
+
+# Si tengo el docker compose instalado, me sitúo en la carpeta donde está este archivo docker-compose.yml y ejecuto:
+#   docker-compose up -d
+# Esto descargará las imágenes necesarias (si no están ya descargadas), 
+# creará y levantará los contenedores definidos en el archivo.
+
+# Si ya estan creados los contenedores, simplemente los levantará en segundo plano (-d).
+
+# Esto detendrá y eliminará los contenedores, redes y volúmenes creados por `up`.
+#   docker-compose down
+
+# Los comandos para levantar y detener los servicios son:
+#   docker-compose up -d    # Levanta los servicios en segundo plano
+
+# Levantar los servicios en primer plano (útil para ver los logs):
+#   docker-compose up        # Levanta los servicios en primer plano
+
+# Levantar un servicio específico:
+#   docker-compose up -d mariadb     # Levanta solo el servicio de MariaDB
+#   docker-compose up -d phpmyadmin   # Levanta solo el servicio de phpMyAdmin
+
+# Levantar los servicios y ver los logs en tiempo real:
+#   docker-compose up mariadb phpmyadmin
+
+# Levantar servicios y seguir los logs de un servicio específico:
+#   docker-compose up -d mariadb && docker-compose logs -f mariadb
+
+# Levantar un servicio significa que se inicia el contenedor correspondiente a ese servicio definido en el archivo docker-compose.yml. para que el servicio esté disponible para su uso. 
+
+# Detener los servicios y eliminar los contenedores:
+#   docker-compose down  # Detiene y elimina los contenedores, redes y volúmenes creados por `up`
+
+# Detener un servicio específico significa que se detiene el contenedor correspondiente a ese servicio, pero no se elimina. 
+# El contenedor puede ser reiniciado posteriormente sin perder su estado.
+# Se hace con el comando:
+#   docker-compose stop mariadb     # Detiene solo el servicio de MariaDB
+#   docker-compose stop phpmyadmin   # Detiene solo el servicio de phpMyAdmin
+# Parar todos los servicios:
+#   docker-compose stop             # Detiene todos los servicios definidos en el archivo docker-compose.yml
+# Reiniciar los servicios:
+#   docker-compose restart          # Reinicia todos los servicios definidos en el archivo docker-compose.yml
+# Para reiniciar un servicio específico:
+#   docker-compose start mariadb     # Inicia solo el servicio de MariaDB
+#   docker-compose start phpmyadmin   # Inicia solo el servicio de phpMyAdmin
+
+### Diferencias entre parar y detener un servicio ### 
+# - Parar un servicio (stop) detiene el contenedor, pero no lo elimina. 
+# El contenedor puede ser reiniciado posteriormente sin perder su estado.
+# - Detener y eliminar un servicio (down) detiene el contenedor y lo elimina, junto con las redes y volúmenes asociados creados por `up`. 
+# Esto significa que cualquier dato almacenado en volúmenes temporales se perderá.
+# Los datos temporales se pierden porque los volúmenes temporales se eliminan cuando se ejecuta `docker-compose down`.
+# Los volúmenes temporales son aquellos que no están definidos explícitamente en la sección `volumes` del archivo docker-compose.yml.
+# En este caso, el volumen `mariadb_data` está definido explícitamente, por lo que los datos almacenados en él persistirán incluso después de ejecutar `docker-compose down`. 
+
+
+# Para entrar en mariadb desde la terminal del host:
+#  docker exec -it mariadb mysql -ugerente -pasd1 hoteles
+
+# Otra opción es usar:
+#   mariadb -h 127.0.0.1 -P 3306 -ugerente -pasd1 hoteles
+
+
+# Este archivo docker-compose.yml define dos servicios: uno para MariaDB y otro para phpMyAdmin. 
+
+# MariaDB se configura con un usuario y una base de datos específicos, y los datos se almacenan en un volumen persistente. 
+# El volumen de persistencia asegura que los datos no se pierdan cuando el contenedor se detiene o se elimina.
+# además, el puerto 3306 de MariaDB se expone solo en localhost para evitar conflictos con otros contenedores de MariaDB en el mismo host.
+# Esto proporciona una capa adicional de seguridad y aislamiento para la base de datos.
+# otra ventaja de exponer el puerto solo en localhost es que limita el acceso a la base de datos desde fuera del host, lo que puede ser beneficioso en entornos de desarrollo o producción donde se desea restringir el acceso a la base de datos.
+
+# PhpMyAdmin se configura para conectarse al servicio de MariaDB y se expone en el puerto 8080 del host para facilitar la administración de la base de datos a través de una interfaz web.
+# Con esta configuración, puedes iniciar ambos servicios con un solo comando (`docker-compose up -d`) y administrar tu base de datos MariaDB fácilmente a través de phpMyAdmin en tu navegador web.
+
+# Para acceder a phpMyAdmin, abre tu navegador web y navega a `http://localhost:8080`. Usa las credenciales definidas en las variables de entorno para iniciar sesión.
